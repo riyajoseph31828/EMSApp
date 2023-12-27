@@ -1,0 +1,53 @@
+<h1>Employee List</h1>
+<div class="container ">
+  <div class="row">
+    <div class="col" *ngFor="let employees of list">
+      <div class="card" style="width: 18rem; margin-top: 10%;">
+        <img height="200px" src="https://www.kindpng.com/picc/m/255-2553833_employee-icon-png-white-employee-icon-png-transparent.png" class="card-img-top responsive" alt="....">
+        <div class="card-header ">
+            <h3 class="card-text">Employee ID:{{employees.id}} <br>Name: {{employees.name}}</h3>
+        </div>
+        <div class="card-body ">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Date of birth:</strong> {{employees.dateOfBirth | date}}</li>
+            <li class="list-group-item"><strong>Gender:</strong> {{getGender(employees.gender)}}</li>
+            <li class="list-group-item"><strong>Mobile No. : </strong>{{employees.mobileNo}}</li>
+            <li class="list-group-item"><strong>Email: </strong>{{employees.email}}</li>
+            <li class="list-group-item"><strong>Salary: </strong>{{employees.salary | currency:'INR'}}</li>
+            <li class="list-group-item"><strong>Department: </strong>{{employees.department.name}}</li>
+          </ul>
+        </div>
+        <div class="card-footer ">
+          <div class="row">
+            <div class="col">
+              <button style="width:40%;margin-left:4%;margin-right:4%" class="btn btn-primary" [routerLink]="['/employees/edit/',employees.id]">Edit</button>
+              <button style="width:40%;margin-left: 5%;" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
+              (click)="setEmployeeId(employees.id)">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" 
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Confirm</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this employee?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-danger " (click)="delete()"  data-bs-dismiss="modal">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+<h1>Add Employee</h1>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-group" hidden>
+        <label class="form-label " for="id">Id</label>
+        <input class="form-control " type="number" id="id" formControlName="id">
+    </div>
+
+    <div class="form-group">
+        <label class="form-label" for="name">Name</label>
+        <input class="form-control" type="text" id="name" formControlName="name">
+        <div *ngIf="form.hasError('required','name') && (form.controls['name'].touched ||
+            form.controls['name'].dirty)" class="alert alert-danger " role="alert">
+            Name is required.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label " for="dateOfBirth">Date of Birth</label>
+        <input class="form-control " type="date" id="dateOfBirth" formControlName="dateOfBirth" >
+        <div *ngIf="form.hasError('required','dateOfBirth') && (form.controls['dateOfBirth'].touched ||
+            form.controls['dateOfBirth'].dirty)" class="alert alert-danger " role="alert">
+         Date of Birth is required.
+        </div>
+    </div><br>
+
+
+    <div class="form-group">
+        <label class="form-check-label " for="gender">Gender </label>
+        <select class="form-select " id="gender" formControlName="gender">
+            <option value="">select a gender</option>
+            <option [value]="1">Male</option>
+            <option [value]="2">Female</option>
+        </select>
+        <div *ngIf="form.hasError('required','gender') && (form.controls['gender'].touched ||
+            form.controls['gender'].dirty)" class="alert alert-danger " role="alert">
+          Please select a gender.
+        </div>
+    </div><br>
+
+    <div class="form-group">
+        <label class="form-label" for="mobileNo">Mobile No.</label>
+        <input class="form-control" type="tel" id="mobileNo" formControlName="mobileNo">
+        <div *ngIf="form.hasError('required','mobileNo') && (form.controls['mobileNo'].touched ||
+            form.controls['mobileNo'].dirty)" class="alert alert-danger " role="alert">
+            Mobile No. is required.
+        </div>
+    </div><br>
+
+    <div class="form-group">
+        <label class="form-label" for="email">Email</label>
+        <input class="form-control" type="email" id="email" formControlName="email">
+        <div *ngIf="form.hasError('required','email') && (form.controls['email'].touched ||
+            form.controls['email'].dirty)" class="alert alert-danger " role="alert">
+            Email is required.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label" for="salary">Salary</label>
+        <input class="form-control" type="number" id="salary" formControlName="salary">
+        <div *ngIf="form.hasError('min','salary') && (form.controls['salary'].touched ||
+            form.controls['salary'].dirty)" class="alert alert-danger " role="alert">
+            Minimum salary is 1000.
+        </div>
+        <div *ngIf="form.hasError('required','salary') && (form.controls['salary'].touched ||
+            form.controls['salary'].dirty)" class="alert alert-danger " role="alert">
+            Salary is required.
+        </div>
+    </div><br>
+    <div class="form-group">
+        <label class="form-check-label " for="departmentId">Department</label>
+        <select class="form-select " id="departmentId" formControlName="departmentId">
+            <option value="">select</option>
+            <option *ngFor="let department of list" [value]="department.id">{{department.id}}-{{ department.name }}
+            </option>
+        </select>
+        <div *ngIf="form.hasError('required','departmentId') && (form.controls['departmentId'].touched ||
+            form.controls['departmentId'].dirty)" class="alert alert-danger " role="alert">
+          Please select a department.
+        </div>
+    </div><br>
+
+    <div class="form-group">
+        <input class="btn btn-primary " [disabled]="form.invalid" type="submit" value="Add Employee">
+    </div>
+
+</form>
